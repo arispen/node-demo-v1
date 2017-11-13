@@ -19,5 +19,6 @@
     "sub":true,
     "node":true,
     "nonstandard":true,
-    "unused": true
+    "unused": true,
+    "esversion": 6
   }

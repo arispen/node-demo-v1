@@ -22,7 +22,9 @@ DBService.findAllNotes = function () {
 };
 
 DBService.findOneNote = function (id) {
-    return DBService.database.findIndex((e) => e.id === id);
+    const idNumber = parseInt(id);
+    const note = DBService.database.find(element => element.id === idNumber );
+    return note;
 };
 
 DBService.removeNote = function (id) {};

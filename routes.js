@@ -8,7 +8,7 @@ function ping(req, res) {
     });
 }
 
-function postNotes(req, res) {
+function postNote(req, res) {
     res.json(db.createNote(req.body.title, req.body.message));
 }
 
@@ -21,4 +21,8 @@ function getNotes(req, res) {
     res.json(response);
 }
 
-module.exports = { ping, postNotes, getNotes };
+function getNote(req, res) {
+    res.json(db.findOneNote(req.params.id));
+}
+
+module.exports = { ping, postNote, getNotes, getNote };

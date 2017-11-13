@@ -16,12 +16,12 @@ app.route('/v1/ping')
     .get(routes.ping);
 
 app.route('/v1/notes')
-    .post(routes.postNotes)
+    .post(routes.postNote)
     .get(routes.getNotes);
-/*
+
 app.route('/v1/notes/:id')
-    .put(routes.putNotes)
-    .get(routes.getNotes)
-    .delete(routes.deleteNotes);
-*/
+    //.put(routes.putNotes)
+    .get(routes.getNote)
+    //.delete(routes.deleteNotes);
+
 app.listen(PORT, () => console.log('index.js is listening on port ' + PORT));

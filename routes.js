@@ -9,8 +9,7 @@ function ping(req, res) {
 }
 
 function postNote(req, res) {
-    //TODO VALIDATE
-    res.json(db.createNote(req.body.title, req.body.message));
+        res.json(db.createNote(req.body.title, req.body.message));
 }
 
 function getNotes(req, res) {

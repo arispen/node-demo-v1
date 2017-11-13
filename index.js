@@ -6,6 +6,7 @@ const app = express();
 
 const PORT = require('./config.json').port;
 const routes = require('./routes');
+const validate = require('./validate');
                                     
 app.use(bodyParser.json());                                     
 app.use(bodyParser.urlencoded({extended: true}));               
@@ -16,7 +17,7 @@ app.route('/v1/ping')
     .get(routes.ping);
 
 app.route('/v1/notes')
-    .post(routes.postNote)
+    .post(validate.postNote, routes.postNote)
     .get(routes.getNotes);
 
 app.route('/v1/notes/:id')

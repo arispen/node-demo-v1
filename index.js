@@ -17,6 +17,8 @@ app.use(bodyParser.json({
     type: 'application/json'
 }));
 
+app.use(validate.format);
+
 app.route('/v1/ping')
     .get(routes.ping);
 

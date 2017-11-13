@@ -20,4 +20,18 @@ Validate.putNote = function (req, res, next) {
     next();
 };
 
+Validate.format = function (req, res, next) {
+    if (req.body.format || req.query.format) {
+        if (req.body.format === 'jsonp' || req.query.format === 'jsonp' ) {
+            req.format = 'jsonp';
+            next();
+        } else {
+            res.status(400).send("Unsupported format.");
+        }
+    } else {
+        req.format = 'json';
+        next();
+    }
+}
+
 module.exports = Validate;

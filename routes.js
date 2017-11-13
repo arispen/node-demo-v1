@@ -3,13 +3,13 @@
 const db = require('./database.service');
 
 function ping(req, res) {
-    res.json({
+    res[req.format]({
         "pong": true
     });
 }
 
 function postNote(req, res) {
-    res.json(db.createNote(req.body.title, req.body.message));
+    res[req.format](db.createNote(req.body.title, req.body.message));
 }
 
 function getNotes(req, res) {
@@ -18,21 +18,21 @@ function getNotes(req, res) {
         count: results.length,
         results
     };
-    res.json(response);
+    res[req.format](response);
 }
 
 function getNote(req, res) {
-    res.json(db.findOneNote(req.params.id));
+    res[req.format](db.findOneNote(req.params.id));
 }
 
 function putNote(req, res) {
-    res.json(db.updateNote(req.params.id, req.body.title, req.body.message));
+    res[req.format](db.updateNote(req.params.id, req.body.title, req.body.message));
 }
 
 function deleteNote(req, res) {
     const success = db.removeNote(req.params.id);
     if (success) {
-        res.json({
+        res[req.format]({
             success: true
         });
     } else {

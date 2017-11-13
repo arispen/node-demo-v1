@@ -13,7 +13,6 @@ DBService.createNote = function (title, message) {
         message: message
     }
     DBService.database.push(newNote);
-    // here will be promises instead
     return newNote;
 }
 
@@ -23,30 +22,29 @@ DBService.findAllNotes = function () {
 
 DBService.findOneNote = function (id) {
     const idNumber = parseInt(id);
-    const note = DBService.database.find(element => element.id === idNumber );
+    const note = DBService.database.find(element => element.id === idNumber);
     return note;
 };
 
 DBService.updateNote = function (id, title, message) {
     const note = DBService.findOneNote(id);
-    note.title = title;
-    note.message = message;
+    if (title) {
+        note.title = title;
+    }
+    if (message) {
+        note.message = message;
+    }
     return note;
 };
 
 DBService.removeNote = function (id) {
     const note = DBService.findOneNote(id);
-    if(note){
+    if (note) {
         DBService.database.splice(DBService.database.findIndex(element => element.id === note.id), 1);
         return true;
     } else {
         return false;
     }
 };
-
-
-
-
-
 
 module.exports = DBService;

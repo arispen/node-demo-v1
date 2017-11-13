@@ -7,11 +7,15 @@ const app = express();
 const PORT = require('./config.json').port;
 const routes = require('./routes');
 const validate = require('./validate');
-                                    
-app.use(bodyParser.json());                                     
-app.use(bodyParser.urlencoded({extended: true}));               
-app.use(bodyParser.text());                                    
-app.use(bodyParser.json({ type: 'application/json'}));  
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({
+    type: 'application/json'
+}));
 
 app.route('/v1/ping')
     .get(routes.ping);
@@ -21,7 +25,7 @@ app.route('/v1/notes')
     .get(routes.getNotes);
 
 app.route('/v1/notes/:id')
-    .put(routes.putNote)
+    .put(validate.putNote, routes.putNote)
     .get(routes.getNote)
     .delete(routes.deleteNote);
 

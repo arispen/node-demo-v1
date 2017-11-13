@@ -27,9 +27,16 @@ DBService.findOneNote = function (id) {
     return note;
 };
 
+DBService.updateNote = function (id, title, message) {
+    const note = DBService.findOneNote(id);
+    note.title = title;
+    note.message = message;
+    return note;
+};
+
 DBService.removeNote = function (id) {};
 
-DBService.updateNote = function (id, title, message) {};
+
 
 
 

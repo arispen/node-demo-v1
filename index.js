@@ -20,8 +20,8 @@ app.route('/v1/notes')
     .get(routes.getNotes);
 
 app.route('/v1/notes/:id')
-    //.put(routes.putNotes)
+    .put(routes.putNote)
     .get(routes.getNote)
-    //.delete(routes.deleteNotes);
+    //.delete(routes.deleteNote);
 
 app.listen(PORT, () => console.log('index.js is listening on port ' + PORT));

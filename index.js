@@ -22,6 +22,6 @@ app.route('/v1/notes')
 app.route('/v1/notes/:id')
     .put(routes.putNote)
     .get(routes.getNote)
-    //.delete(routes.deleteNote);
+    .delete(routes.deleteNote);
 
 app.listen(PORT, () => console.log('index.js is listening on port ' + PORT));

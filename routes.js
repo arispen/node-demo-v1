@@ -31,4 +31,13 @@ function putNote(req, res) {
     res.json(db.updateNote(req.params.id, req.body.title, req.body.message));
 }
 
-module.exports = { ping, postNote, getNotes, getNote, putNote };
+function deleteNote(req, res) {
+    const success = db.removeNote(req.params.id);
+    if (success) {
+        res.json({success: true});
+    } else {
+        res.status(404).send("Element does not exist.");
+    }
+}
+
+module.exports = { ping, postNote, getNotes, getNote, putNote, deleteNote };

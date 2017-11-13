@@ -34,7 +34,15 @@ DBService.updateNote = function (id, title, message) {
     return note;
 };
 
-DBService.removeNote = function (id) {};
+DBService.removeNote = function (id) {
+    const note = DBService.findOneNote(id);
+    if(note){
+        DBService.database.splice(DBService.database.findIndex(element => element.id === note.id), 1);
+        return true;
+    } else {
+        return false;
+    }
+};
 
 
 

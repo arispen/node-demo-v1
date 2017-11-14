@@ -1,21 +1,22 @@
 'use strict';
 
 const db = require('./sqlite3.db.service');
+const Controller = {};
 
-function ping(req, res) {
+Controller.ping = function(req, res) {
     res[req.format]({
         "pong": true
     });
 }
 
-function postNote(req, res) {
+Controller.postNote = function(req, res) {
     db.createNote(req.body.title, req.body.message)
         .then((result) => {
             res[req.format](result);
         });
 }
 
-function getNotes(req, res) {
+Controller.getNotes = function(req, res) {
     db.findAllNotes(req.query.offset, req.query.limit)
         .then((results) => {
             const response = {
@@ -26,14 +27,14 @@ function getNotes(req, res) {
         });
 }
 
-function getNote(req, res) {
+Controller.getNote = function(req, res) {
     db.findOneNote(req.params.id).then(result => {
         res[req.format](result);
     });
 
 }
 
-function putNote(req, res) {
+Controller.putNote = function(req, res) {
     db.updateNote(req.params.id, req.body.title, req.body.message).then(result => {
         const updatedNote = result;
         if (updatedNote) {
@@ -47,7 +48,7 @@ function putNote(req, res) {
     });
 }
 
-function deleteNote(req, res) {
+Controller.deleteNote = function(req, res) {
     db.removeNote(req.params.id).then(result => {
         const success = result;
         if (success) {
@@ -63,11 +64,4 @@ function deleteNote(req, res) {
     });
 }
 
-module.exports = {
-    ping,
-    postNote,
-    getNotes,
-    getNote,
-    putNote,
-    deleteNote
-};
+module.exports = Controller;

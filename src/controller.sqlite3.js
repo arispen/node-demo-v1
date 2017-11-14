@@ -5,7 +5,7 @@ const Controller = {};
 
 Controller.ping = function(req, res) {
     res[req.format]({
-        "pong": true
+        'pong': true
     });
 }
 
@@ -33,8 +33,8 @@ Controller.getNote = function(req, res) {
             res[req.format](note);
         } else {
             res.status(404)[req.format]({
-                "code": 404,
-                "message": "Element does not exist."
+                'code': 404,
+                'message': 'Element does not exist.'
             });
         }
     });
@@ -46,8 +46,8 @@ Controller.putNote = function(req, res) {
             res[req.format](updatedNote);
         } else {
             res.status(404)[req.format]({
-                "code": 404,
-                "message": "Element does not exist."
+                'code': 404,
+                'message': 'Element does not exist.'
             });
         }
     });
@@ -61,8 +61,8 @@ Controller.deleteNote = function(req, res) {
             });
         } else {
             res.status(404)[req.format]({
-                "code": 404,
-                "message": "Element does not exist."
+                'code': 404,
+                'message': 'Element does not exist.'
             });
         }
     });

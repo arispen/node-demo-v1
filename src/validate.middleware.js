@@ -9,7 +9,7 @@ Validate.format = function (req, res, next) {
             req.format = 'jsonp';
             next();
         } else {
-            res.status(400).send("Unsupported format.");
+            res.status(400).send('Unsupported format.');
         }
     } else {
         req.format = 'json';
@@ -20,19 +20,19 @@ Validate.format = function (req, res, next) {
 Validate.postNote = function (req, res, next) {
     if (!req.body.title || !req.body.message) {
         res.status(400)[req.format]({
-            "code": 400,
-            "message": "Invalid parameters."
+            'code': 400,
+            'message': 'Invalid parameters.'
         });
     } else {
         if (req.body.title.length < minimumParameterLength) {
             res.status(400)[req.format]({
-                "code": 400,
-                "message": "Invalid 'title' parameter."
+                'code': 400,
+                'message': 'Invalid "title" parameter.'
             });
         } else if (req.body.message.length < minimumParameterLength) {
             res.status(400)[req.format]({
-                "code": 400,
-                "message": "Invalid 'message' parameter."
+                'code': 400,
+                'message': 'Invalid "message" parameter.'
             });
         } else {
             next();
@@ -43,13 +43,13 @@ Validate.postNote = function (req, res, next) {
 Validate.putNote = function (req, res, next) {
     if (req.body.title && req.body.title.length < minimumParameterLength) {
         res.status(400)[req.format]({
-            "code": 400,
-            "message": "Invalid 'title' parameter."
+            'code': 400,
+            'message': 'Invalid "title" parameter.'
         });
     } else if (req.body.message && req.body.message.length < minimumParameterLength) {
         res.status(400)[req.format]({
-            "code": 400,
-            "message": "Invalid 'message' parameter."
+            'code': 400,
+            'message': 'Invalid "message" parameter.'
         });
     } else {
         next();

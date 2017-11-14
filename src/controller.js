@@ -26,7 +26,12 @@ function getNote(req, res) {
 }
 
 function putNote(req, res) {
-    res[req.format](db.updateNote(req.params.id, req.body.title, req.body.message));
+    const updatedNote = db.updateNote(req.params.id, req.body.title, req.body.message);
+    if (updatedNote) {
+        res[req.format](updatedNote);
+    } else {
+        res.status(404).send("Element does not exist.");
+    }
 }
 
 function deleteNote(req, res) {

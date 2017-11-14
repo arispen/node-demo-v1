@@ -28,6 +28,9 @@ DBService.findOneNote = function (id) {
 
 DBService.updateNote = function (id, title, message) {
     const note = DBService.findOneNote(id);
+    if(!note){
+        return false;
+    }
     if (title) {
         note.title = title;
     }
@@ -39,11 +42,11 @@ DBService.updateNote = function (id, title, message) {
 
 DBService.removeNote = function (id) {
     const note = DBService.findOneNote(id);
-    if (note) {
+    if(!note){
+        return false;
+    } else {
         DBService.database.splice(DBService.database.findIndex(element => element.id === note.id), 1);
         return true;
-    } else {
-        return false;
     }
 };
 

@@ -1,6 +1,6 @@
 'use strict';
 
-const db = require('./database.service');
+const db = require('./memory.db.service');
 
 function ping(req, res) {
     res[req.format]({

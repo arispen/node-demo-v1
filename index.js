@@ -5,8 +5,8 @@ const bodyParser = require('body-parser')
 const app = express();
 
 const PORT = require('./config.json').port;
-const routes = require('./routes');
-const validate = require('./validate');
+const controller = require('./src/controller');
+const validate = require('./src/validate.middleware');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -20,15 +20,15 @@ app.use(bodyParser.json({
 app.use(validate.format);
 
 app.route('/v1/ping')
-    .get(routes.ping);
+    .get(controller.ping);
 
 app.route('/v1/notes')
-    .post(validate.postNote, routes.postNote)
-    .get(routes.getNotes);
+    .post(validate.postNote, controller.postNote)
+    .get(controller.getNotes);
 
 app.route('/v1/notes/:id')
-    .put(validate.putNote, routes.putNote)
-    .get(routes.getNote)
-    .delete(routes.deleteNote);
+    .put(validate.putNote, controller.putNote)
+    .get(controller.getNote)
+    .delete(controller.deleteNote);
 
 app.listen(PORT, () => console.log('index.js is listening on port ' + PORT));

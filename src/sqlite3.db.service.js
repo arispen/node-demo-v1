@@ -29,6 +29,9 @@ SQLiteDBService.findOneNote = function(id) {
 
 SQLiteDBService.updateNote = function(id, newTitle, newMessage) {
     return Note.findById(id).then((note) => {
+        if(!note){
+            return null;
+        }
         if (newTitle) {
             note.title = newTitle;
         }
@@ -36,11 +39,14 @@ SQLiteDBService.updateNote = function(id, newTitle, newMessage) {
             note.message = newMessage;
         }
         return note.save();
-    })
+    });
 }
 
 SQLiteDBService.removeNote = function(id) {
     return Note.findById(id).then((note) => {
+        if(!note){
+            return null;
+        }
         return note.destroy();
     });
 }

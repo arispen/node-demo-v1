@@ -30,7 +30,7 @@ function getNote(req, res) {
     db.findOneNote(req.params.id).then(result => {
         res[req.format](result);
     });
-    
+
 }
 
 function putNote(req, res) {
@@ -39,7 +39,10 @@ function putNote(req, res) {
         if (updatedNote) {
             res[req.format](updatedNote);
         } else {
-            res.status(404).send("Element does not exist.");
+            res.status(404)[req.format]({
+                "code": 404,
+                "message": "Element does not exist."
+            });
         }
     });
 }
@@ -52,7 +55,10 @@ function deleteNote(req, res) {
                 success: true
             });
         } else {
-            res.status(404).send("Element does not exist.");
+            res.status(404)[req.format]({
+                "code": 404,
+                "message": "Element does not exist."
+            });
         }
     });
 }

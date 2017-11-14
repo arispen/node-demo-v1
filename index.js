@@ -4,7 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 const app = express();
 
-const PORT = require('./config.json').port;
+const PORT = require('./config').port;
 const controller = require('./src/controller.sqlite3');
 const validate = require('./src/validate.middleware');
 

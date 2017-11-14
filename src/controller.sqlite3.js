@@ -28,15 +28,20 @@ Controller.getNotes = function(req, res) {
 }
 
 Controller.getNote = function(req, res) {
-    db.findOneNote(req.params.id).then(result => {
-        res[req.format](result);
+    db.findOneNote(req.params.id).then(note => {
+        if(note){
+            res[req.format](note);
+        } else {
+            res.status(404)[req.format]({
+                "code": 404,
+                "message": "Element does not exist."
+            });
+        }
     });
-
 }
 
 Controller.putNote = function(req, res) {
-    db.updateNote(req.params.id, req.body.title, req.body.message).then(result => {
-        const updatedNote = result;
+    db.updateNote(req.params.id, req.body.title, req.body.message).then(updatedNote => {
         if (updatedNote) {
             res[req.format](updatedNote);
         } else {
@@ -49,8 +54,7 @@ Controller.putNote = function(req, res) {
 }
 
 Controller.deleteNote = function(req, res) {
-    db.removeNote(req.params.id).then(result => {
-        const success = result;
+    db.removeNote(req.params.id).then(success => {
         if (success) {
             res[req.format]({
                 success: true

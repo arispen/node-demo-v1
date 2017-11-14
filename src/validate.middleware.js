@@ -1,28 +1,11 @@
 'use strict';
 
 const Validate = {};
-
-Validate.postNote = function (req, res, next) {
-    if (!req.body.title || !req.body.message) {
-        res.status(400).send("Improper parameter values.");
-    } else {
-        next();
-    }
-};
-
-Validate.putNote = function (req, res, next) {
-    if (req.body.title && req.body.title.length < 3) {
-        res.status(400).send("Invalid 'title' parameter.");
-    } else if (req.body.message && req.body.message.length < 3) {
-        res.status(400).send("Invalid 'message' parameter.");
-    } else {
-        next();
-    }
-};
+const minimumParameterLength = 3;
 
 Validate.format = function (req, res, next) {
     if (req.body.format || req.query.format) {
-        if (req.body.format === 'jsonp' || req.query.format === 'jsonp' ) {
+        if (req.body.format === 'jsonp' || req.query.format === 'jsonp') {
             req.format = 'jsonp';
             next();
         } else {
@@ -33,5 +16,44 @@ Validate.format = function (req, res, next) {
         next();
     }
 }
+
+Validate.postNote = function (req, res, next) {
+    if (!req.body.title || !req.body.message) {
+        res.status(400)[req.format]({
+            "code": 400,
+            "message": "Invalid parameters."
+        });
+    } else {
+        if (req.body.title.length < minimumParameterLength) {
+            res.status(400)[req.format]({
+                "code": 400,
+                "message": "Invalid 'title' parameter."
+            });
+        } else if (req.body.message.length < minimumParameterLength) {
+            res.status(400)[req.format]({
+                "code": 400,
+                "message": "Invalid 'message' parameter."
+            });
+        } else {
+            next();
+        }
+    }
+};
+
+Validate.putNote = function (req, res, next) {
+    if (req.body.title && req.body.title.length < minimumParameterLength) {
+        res.status(400)[req.format]({
+            "code": 400,
+            "message": "Invalid 'title' parameter."
+        });
+    } else if (req.body.message && req.body.message.length < minimumParameterLength) {
+        res.status(400)[req.format]({
+            "code": 400,
+            "message": "Invalid 'message' parameter."
+        });
+    } else {
+        next();
+    }
+};
 
 module.exports = Validate;

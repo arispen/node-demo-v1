@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = express();
 
 const PORT = require('./config.json').port;
-const controller = require('./src/controller');
+const controller = require('./src/controller.sqlite3');
 const validate = require('./src/validate.middleware');
 
 app.use(bodyParser.json());
